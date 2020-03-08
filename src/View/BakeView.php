@@ -21,7 +21,7 @@ use Cake\Core\ConventionsTrait;
 use Cake\Core\InstanceConfigTrait;
 use Cake\Core\Plugin;
 use Cake\Event\EventInterface;
-use WyriHaximus\TwigView\View\TwigView;
+use Cake\TwigView\View\TwigView;
 
 class BakeView extends TwigView
 {
@@ -44,15 +44,6 @@ class BakeView extends TwigView
     protected $_tmpLocation;
 
     /**
-     * Templates extensions to search for.
-     *
-     * @var string[]
-     */
-    protected $extensions = [
-        '.twig',
-    ];
-
-    /**
      * Initialize view
      *
      * @return void
@@ -72,9 +63,7 @@ class BakeView extends TwigView
             mkdir($this->_tmpLocation);
         }
 
-        Configure::write(TwigView::ENV_CONFIG, [
-            'cache' => false,
-        ]);
+        $this->setConfig('environment.cache', false);
 
         parent::initialize();
     }
